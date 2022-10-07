@@ -54,7 +54,7 @@ pipeline {
             }
             steps {
                 unstash 'page'
-                sh 'cat public/index.html'
+                sh 'cp public/index.html index.html'
             }
         }
     }
