@@ -12,8 +12,11 @@ pipeline {
                 } 
             }
             steps {
-                sh 'python get_spec.py'
-                stash includes: 'spec.json', name: 'spec'  
+                dir('get_spec') {
+                    sh 'pip install -r requirements.txt'
+                    sh 'python get_spec.py'
+                    stash includes: 'spec.json', name: 'spec'
+                }
             }
         }
         stage('generate static content') {
@@ -24,6 +27,9 @@ pipeline {
             }
             steps {
                 unstash 'spec'
+                dir('get_spec') {
+                    sh "pwd"
+                }
                 sh 'npx spectaql config.yml'
                 stash includes: 'public/*', name: 'content'
             }
