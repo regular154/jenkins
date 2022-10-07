@@ -21,6 +21,7 @@ class SpecGenerator:
         parser.add_argument('--url', type=str, help='Graphql server introspection url')
         parser.add_argument('--title', type=str, help='Title')
         parser.add_argument('--description', type=str, help='Description')
+        parser.add_argument('--server', type=str, help='Server url')
         return parser.parse_args()
 
     def get_spec(self, url):
@@ -30,12 +31,13 @@ class SpecGenerator:
         with open("spec.json", "w") as outf:
             outf.write(str(json.dumps(spec_json)))
     
-    def modify_config(self, title, description):
+    def modify_config(self, title, description, server):
         with open("config.yml", "r") as stream:
             try:
                 config = yaml.safe_load(stream)
                 config['info']['title'] = title
                 config['info']['description'] = description
+                config['servers'].append({'url': server})
             except yaml.YAMLError as exc:
                 warnings.warn(f"FAIL: Config file couldn't be modified because - {exc}")
         with open("config_modified.yml", 'w') as outf:
@@ -46,4 +48,4 @@ if __name__ == '__main__':
     arguments = SpecGenerator._configure_console_parser() 
     publish_api_specs = SpecGenerator()
     publish_api_specs.get_spec(arguments.url)
-    publish_api_specs.modify_config(arguments.title, arguments.description)
+    publish_api_specs.modify_config(arguments.title, arguments.description, arguments.server)
