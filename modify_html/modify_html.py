@@ -1,4 +1,4 @@
-import bs4
+import beautifulsoup4 as bs4
 
 
 class GraphqlPageModifier:
