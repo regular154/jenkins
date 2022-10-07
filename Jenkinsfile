@@ -47,11 +47,6 @@ pipeline {
             }
         }
         stage('push html to kong') {
-            agent { 
-                docker { 
-                    image 'python:3.10.7-alpine' 
-                } 
-            }
             steps {
                 unstash 'page'
                 sh 'cp public/index.html index.html'
