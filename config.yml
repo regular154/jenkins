@@ -1,5 +1,6 @@
 spectaql:
   displayAllServers: true
+  themeDir: ./theme
 
 introspection:
   introspectionFile: spec.json
