@@ -19,8 +19,6 @@ pipeline {
                 sh 'printenv'
             }
         }
-    }
-    stages {
         stage('deploy') {
             agent { 
                 docker { 
