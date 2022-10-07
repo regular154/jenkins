@@ -8,3 +8,5 @@ It takes as parameters:
  - description
 
 It uses spectaql and can be customized by updating theme/stylesheets/custom.scss file.
+
+//TODO: complete publish stage
