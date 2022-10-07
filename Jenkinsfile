@@ -12,10 +12,12 @@ pipeline {
                 } 
             }
             steps {
-                dir('get_spec') {
-                    sh 'pip install -r requirements.txt'
-                    sh 'python get_spec.py'
-                    stash includes: 'spec.json', name: 'spec'
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    dir('get_spec') {
+                        sh 'pip install -r requirements.txt'
+                        sh 'python get_spec.py'
+                        stash includes: 'spec.json', name: 'spec'
+                    }
                 }
             }
         }
