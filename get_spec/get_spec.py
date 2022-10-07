@@ -37,7 +37,7 @@ class SpecGenerator:
                 config = yaml.safe_load(stream)
                 config['info']['title'] = title
                 config['info']['description'] = description
-                config['servers'].append({'url': server})
+                config['servers'] = [{'url': server}]
             except yaml.YAMLError as exc:
                 warnings.warn(f"FAIL: Config file couldn't be modified because - {exc}")
         with open("config_modified.yml", 'w') as outf:
