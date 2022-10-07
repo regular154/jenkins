@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'SPEC_URL', defaultValue: '', description: 'Graphql server introspection url')
+    }
     stages {
         stage('get spec') {
             agent { 
@@ -11,7 +14,7 @@ pipeline {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     dir('get_spec') {
                         sh 'pip install -r requirements.txt'
-                        sh 'python get_spec.py'
+                        sh 'python get_spec.py --spec_url ${SPEC_URL}'
                         stash includes: 'spec.json', name: 'spec'
                     }
                 }
