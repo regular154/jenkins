@@ -18,6 +18,6 @@ info:
   title: Title
   description: Description
 
-servers:
-  - url: https://swapi-graphql.netlify.app/.netlify/functions/index
-    description: Staging
+# servers:
+#   - url: https://swapi-graphql.netlify.app/.netlify/functions/index
+#     description: Staging
