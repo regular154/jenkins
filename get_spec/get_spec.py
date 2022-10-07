@@ -29,7 +29,7 @@ class SpecGenerator:
         with open("spec.json", "w") as outf:
             outf.write(str(json.dumps(spec_json)))
     
-    def modify_config(self, url):
+    def modify_config(self, title, description):
         with open("config.yml", "r") as stream:
             try:
                 config = yaml.safe_load(stream)
