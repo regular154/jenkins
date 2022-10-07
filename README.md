@@ -5,4 +5,5 @@ It takes as parameters:
  - server url
  - title
  - description
+
 It uses spectaql and can be customized by updating theme/stylesheets/custom.scss file.
