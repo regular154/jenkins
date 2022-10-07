@@ -13,7 +13,7 @@ class GraphqlPageModifier:
             link.extract()
 
     def add_script(self, page):
-        with open("public/javascripts/spectaql.min.js") as inf:
+        with open("javascripts/spectaql.min.js") as inf:
             script_txt = inf.read()
             script_tag = page.new_tag("script")
             script_tag.append(script_txt)
