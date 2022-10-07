@@ -1,5 +1,5 @@
-# jenkins
-This Jenkins job generates graphql pi description in one static single html file (index.html) which contains styles and scripts in its head.
+# Jenkins job for generating html file for graphql API
+This Jenkins job generates graphql API description into one single html file (index.html) which contains styles and scripts in its head.
 
 It takes as parameters:
  - introspection url
