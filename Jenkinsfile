@@ -5,30 +5,50 @@ pipeline {
         DB_ENGINE    = 'sqlite'
     }
     stages {
-        stage('build') {
+        stage('get spec') {
             agent { 
                 docker { 
                     image 'python:3.10.7-alpine' 
                 } 
             }
             steps {
-                sh 'python --version'
-                sh 'echo Hello'
-                echo "Database engine is ${DB_ENGINE}"
-                echo "DISABLE_AUTH is ${DISABLE_AUTH}"
-                sh 'printenv'
+                sh 'python get_spec.py'
+                stash includes: 'spec.json', name: 'spec'  
             }
         }
-        stage('deploy') {
+        stage('generate static content') {
             agent { 
                 docker { 
                     image 'siroshtan154/spectaql' 
                 } 
             }
             steps {
-                sh 'node --version'
-                sh 'spectaql --version'
+                unstash 'spec'
                 sh 'npx spectaql config.yml'
+                stash includes: 'public/*', name: 'content'
+            }
+        }
+        stage('modify html') {
+            agent { 
+                docker { 
+                    image 'python:3.10.7-alpine' 
+                } 
+            }
+            steps {
+                unstash 'content'
+                sh 'python modify_html.py'
+                stash includes: 'public/index.html', name: 'page'
+            }
+        }
+        stage('push html to kong') {
+            agent { 
+                docker { 
+                    image 'python:3.10.7-alpine' 
+                } 
+            }
+            steps {
+                unstash 'page'
+                sh 'echo todo push'
             }
         }
     }
