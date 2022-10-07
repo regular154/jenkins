@@ -58,7 +58,7 @@ pipeline {
             }
             steps {
                 unstash 'page'
-                sh 'echo todo push'
+                sh 'cat public/index.html'
             }
         }
     }
