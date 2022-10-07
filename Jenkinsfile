@@ -2,6 +2,8 @@ pipeline {
     agent any
     parameters {
         string(name: 'INTROSPECTION_URL', defaultValue: '', description: 'Graphql server introspection url')
+        string(name: 'TITLE', defaultValue: '', description: 'Title')
+        string(name: 'DESCRIPTION', defaultValue: '', description: 'Description')
     }
     stages {
         stage('get spec') {
@@ -14,8 +16,9 @@ pipeline {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     dir('get_spec') {
                         sh 'pip install -r requirements.txt'
-                        sh 'python get_spec.py --url ${INTROSPECTION_URL}'
+                        sh 'python get_spec.py --url ${INTROSPECTION_URL} --title ${TITLE} --description ${DESCRIPTION}'
                         stash includes: 'spec.json', name: 'spec'
+                        stash includes: 'config_modified.yml', name: 'config'
                     }
                 }
             }
@@ -28,7 +31,8 @@ pipeline {
             }
             steps {
                 unstash 'spec'
-                sh 'npx spectaql config.yml'
+                unstash 'config'
+                sh 'npx spectaql config_modified.yml'
                 stash includes: 'public/**', name: 'content'
             }
         }
