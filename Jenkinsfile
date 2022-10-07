@@ -30,7 +30,7 @@ pipeline {
             steps {
                 unstash 'spec'
                 sh 'npx spectaql config.yml'
-                stash includes: 'public/*', name: 'content'
+                stash includes: 'public/**', name: 'content'
             }
         }
         stage('modify html') {
