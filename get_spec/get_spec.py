@@ -1,5 +1,6 @@
 import requests
 import json
+import argparse
 
 
 introspection_query = """
@@ -12,15 +13,22 @@ class SpecGenerator:
 
     def __init__(self):
         pass
+    
+    @staticmethod
+    def _configure_console_parser():
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--url', type=str, help='Graphql server introspection url')
+        return parser.parse_args()
 
-    def generate(self):
+    def generate(self, url):
         headers = {'Content-Type': 'application/json'}
-        response = requests.post(url='https://swapi-graphql.netlify.app/.netlify/functions/index', data=introspection_query, headers=headers)
+        response = requests.post(url=url, data=introspection_query, headers=headers)
         spec_json = response.json()
         with open("spec.json", "w") as outf:
             outf.write(str(json.dumps(spec_json)))
 
 
 if __name__ == '__main__':
+    arguments = PublishApiSpecs._configure_console_parser() 
     publish_api_specs = SpecGenerator()
-    publish_api_specs.generate()
+    publish_api_specs.generate(arguments.url)
