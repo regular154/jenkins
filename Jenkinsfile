@@ -14,12 +14,10 @@ pipeline {
             }
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    dir('get_spec') {
-                        sh 'pip install -r requirements.txt'
-                        sh 'python get_spec.py --url ${INTROSPECTION_URL} --title ${TITLE} --description ${DESCRIPTION}'
-                        stash includes: 'spec.json', name: 'spec'
-                        stash includes: 'config_modified.yml', name: 'config'
-                    }
+                    sh 'pip install -r get_spec/requirements.txt'
+                    sh 'python get_spec/get_spec.py --url ${INTROSPECTION_URL} --title ${TITLE} --description ${DESCRIPTION}'
+                    stash includes: 'spec.json', name: 'spec'
+                    stash includes: 'config_modified.yml', name: 'config'
                 }
             }
         }
