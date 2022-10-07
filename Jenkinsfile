@@ -28,6 +28,7 @@ pipeline {
             steps {
                 sh 'node --version'
                 sh 'spectaql --version'
+                sh 'npx spectaql config.yml'
             }
         }
     }
