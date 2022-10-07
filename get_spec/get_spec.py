@@ -29,6 +29,6 @@ class SpecGenerator:
 
 
 if __name__ == '__main__':
-    arguments = PublishApiSpecs._configure_console_parser() 
+    arguments = SpecGenerator._configure_console_parser() 
     publish_api_specs = SpecGenerator()
     publish_api_specs.generate(arguments.url)
