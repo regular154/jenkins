@@ -15,8 +15,8 @@ extensions:
   graphqlScalarExamples: true
 
 info:
-  title: Star Wars API Reference
-  description: May the force be with you
+  title: Title
+  description: Description
 
 servers:
   - url: https://swapi-graphql.netlify.app/.netlify/functions/index
