@@ -40,9 +40,14 @@ pipeline {
                 } 
             }
             steps {
-                unstash 'content'
-                sh 'python modify_html.py'
-                stash includes: 'public/index.html', name: 'page'
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    dir('modify_html') {
+                        unstash 'content'
+                        sh 'pip install -r requirements.txt'
+                        sh 'python modify_html.py'
+                        stash includes: 'public/index.html', name: 'page'
+                    }
+                }                
             }
         }
         stage('push html to kong') {
