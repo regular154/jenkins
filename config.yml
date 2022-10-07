@@ -3,7 +3,6 @@ spectaql:
 
 introspection:
   introspectionFile: spec.json
-  url: https://swapi-graphql.netlify.app/.netlify/functions/index
   removeTrailingPeriodFromDescriptions: false
   queryNameStrategy: capitalizeFirst
   fieldExpansionDepth: 2
