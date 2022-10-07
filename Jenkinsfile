@@ -29,9 +29,6 @@ pipeline {
             }
             steps {
                 unstash 'spec'
-                dir('get_spec') {
-                    sh "pwd"
-                }
                 sh 'npx spectaql config.yml'
                 stash includes: 'public/*', name: 'content'
             }
