@@ -17,6 +17,3 @@ extensions:
 info:
   title: Title
   description: Description
-
-servers:
-  - url: https://some.url
