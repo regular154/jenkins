@@ -1,6 +1,7 @@
 import requests
 import json
 import argparse
+import yaml
 
 
 introspection_query = """
