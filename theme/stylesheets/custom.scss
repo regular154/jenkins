@@ -1,0 +1,20 @@
+$background: #222222;
+
+$text-color: red;
+$text-color-subtle: #808080;
+
+$link-color: yellow;
+$link-color-hover: #83dced;
+
+$border-color: black;
+$border-color-subtle: black;
+
+$background-code-block-heading: #554a0a;
+$background-code-block: #554a0a;
+$background-arguments: #554a0a;
+
+#spectaql {
+    .row-field-arguments .field-arguments {
+      border: none;
+    }
+  }
