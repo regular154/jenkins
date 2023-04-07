@@ -5,7 +5,7 @@ pipeline {
             steps {
                 build job: 'test/main', parameters: [
                         string(name: 'TITLE', value: 'title example'),
-                        file(name: 'HTML', file: 'test.html')
+                        file(name: 'HTML', file: '/test.html')
                 ]
             }
         }
