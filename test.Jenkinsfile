@@ -7,7 +7,7 @@ pipeline {
                     sh 'echo $HOME'
                     sh 'ls'
                     build job: 'test/main', parameters: [
-                        file(name: 'HTML', value: '@$HOME/test.html')
+                        file(name: 'HTML', file: '@$HOME/test.html')
                     ]
                 }
             }
