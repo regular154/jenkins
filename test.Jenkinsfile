@@ -3,8 +3,7 @@ pipeline {
     stages {
         stage('trigger job') {
             steps {
-                script {
-                    build job: 'test/main', parameters: [
+                build job: 'test/main', parameters: [
                         string(name: 'TITLE', value: 'title example'),
                         file(name: 'HTML', file: 'test.html')
                 ]
