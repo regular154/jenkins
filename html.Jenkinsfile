@@ -10,6 +10,7 @@ pipeline {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     unstash 'HTML'
                     sh 'cat HTML'
+                    sh 'echo $TITLE'
                 }
             }
         }
