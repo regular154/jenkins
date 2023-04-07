@@ -17,14 +17,12 @@ pipeline {
     }
 }
 
-@NonCPS
 def getFileItem() {
-    def largeFileObject = new File(pwd(), "test.html")
-    def diskFileItem = new org.apache.commons.fileupload.disk.DiskFileItem("fieldNameFile", "application/vnd.android.package-archive", false, largeFileObject.getName(), (int) largeFileObject.length() , largeFileObject.getParentFile())
-    def inputStream = new FileInputStream(largeFileObject)
-    def outputStream = diskFileItem.getOutputStream()
-    org.apache.commons.io.IOUtils.copy(inputStream, outputStream)
-    inputStream.close()
-    outputStream.close()
-    return diskFileItem
+    def myFileContent = readFile("test.html")
+    FilePath fp = new FilePath(new File("${WORKSPACE}","HTML"))
+    if(fp!=null){
+        fp.write(myFileContent, null)
+    }
+    def file = new File("${WORKSPACE}/HTML")
+    return file
 }
