@@ -9,9 +9,9 @@ pipeline {
                     sh 'cat $HOME/test.html'
                     build job: 'test/main', parameters: [
                         stashedFile(name: 'HTML', file: [
-                            $class: 'org.apache.commons.fileupload.disk.DiskFileItem'
+                            $class: 'org.apache.commons.fileupload.disk.DiskFileItem',
                             repository: [
-                                $class: 'java.io.File'
+                                $class: 'java.io.File',
                                 pathname: '/test.html'
                             ]
                         ])
