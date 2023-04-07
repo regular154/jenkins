@@ -7,8 +7,9 @@ pipeline {
                     sh 'echo $HOME'
                     sh 'ls'
                     sh 'cat $HOME/test.html'
+                    defFile()
                     build job: 'test/main', parameters: [
-                        stashedFile(name: 'HTML', file: getFileItem()),
+                        stashedFile(name: 'HTML', file: new FileParameterValue("HTML", HTML, "HTML")),
                         string(name: 'TITLE', value: 'PMDAPI')
                     ]
                 }
@@ -17,12 +18,6 @@ pipeline {
     }
 }
 
-def getFileItem() {
-    def myFileContent = readFile("test.html")
-    FilePath fp = new FilePath(new File("${WORKSPACE}","HTML"))
-    if(fp!=null){
-        fp.write(myFileContent, null)
-    }
-    def file = new File("${WORKSPACE}/HTML")
-    return file
+def defFile() {
+    def myFile = new File("${WORKSPACE}/HTML")
 }
