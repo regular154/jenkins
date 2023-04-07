@@ -7,17 +7,13 @@ pipeline {
                     sh 'echo $HOME'
                     sh 'ls'
                     sh 'cat $HOME/test.html'
-                    defFile()
+                    writeFile(file: 'HTML', text: readFile(file: 'test.html'))
                     build job: 'test/main', parameters: [
-                        stashedFile(name: 'HTML', file: new FileParameterValue("HTML", HTML, "HTML")),
+                        stashedFile(name: 'HTML', file: new FileParameterValue("HTML", HTML)),
                         string(name: 'TITLE', value: 'PMDAPI')
                     ]
                 }
             }
         }
     }
-}
-
-def defFile() {
-    def myFile = new File("${WORKSPACE}/HTML")
 }
