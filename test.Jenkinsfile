@@ -3,9 +3,11 @@ pipeline {
     stages {
         stage('trigger job') {
             steps {
-                build job: 'test/main', parameters: [
-                    file(name: 'HTML', value: '@$HOME/test.html')
-                ]
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    build job: 'test/main', parameters: [
+                        file(name: 'HTML', value: '@$HOME/test.html')
+                    ]
+                }
             }
         }
     }
