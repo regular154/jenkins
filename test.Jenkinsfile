@@ -3,10 +3,8 @@ pipeline {
     stages {
         stage('trigger job') {
             steps {
-                stash allowEmpty: false, includes: 'test.html', name: 'HTML'
-                unstash 'HTML'
                 build job: 'test/main', parameters: [
-                    stashedFile(name: 'HTML', file: HTML),
+                    stashedFile(name: 'HTML', file: [$class: "FileParameterValue", name: "propertiesFile", file: new FileParameterValue.FileItemImpl(new File('test.html'))]),
                     string(name: 'TITLE', value: 'sample of title value')
                 ]
             }
