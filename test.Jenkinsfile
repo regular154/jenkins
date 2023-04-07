@@ -7,7 +7,7 @@ pipeline {
                     stash allowEmpty: false, includes: 'test.html', name: 'HTML'
                     unstash 'HTML'
                     build job: 'test/main', parameters: [
-                        stashedFile(name: 'HTML', file: new FileParameterValue("HTML", HTML, "HTML")),
+                        stashedFile(name: 'HTML', file: HTML)),
                         string(name: 'TITLE', value: 'PMDAPI')
                     ]
                 }
