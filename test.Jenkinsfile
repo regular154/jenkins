@@ -8,7 +8,7 @@ pipeline {
                     sh 'ls'
                     sh 'cat $HOME/test.html'
                     build job: 'test/main', parameters: [
-                        stashedFile(name: 'HTML', file: [file(name: 'test.html')])
+                        stashedFile(name: 'HTML', file: [$class: 'org.apache.commons.fileupload.FileItem' name: 'test.html'])
                     ]
                 }
             }
