@@ -3,14 +3,12 @@ pipeline {
     stages {
         stage('trigger job') {
             steps {
-                withEnv(["HOME=${env.WORKSPACE}"]) {
-                    stash allowEmpty: false, includes: 'test.html', name: 'HTML'
-                    unstash 'HTML'
-                    build job: 'test/main', parameters: [
-                        stashedFile(name: 'HTML', file: HTML)),
-                        string(name: 'TITLE', value: 'PMDAPI')
-                    ]
-                }
+                stash allowEmpty: false, includes: 'test.html', name: 'HTML'
+                unstash 'HTML'
+                build job: 'test/main', parameters: [
+                    stashedFile(name: 'HTML', file: HTML),
+                    string(name: 'TITLE', value: 'sample of title value')
+                ]
             }
         }
     }
