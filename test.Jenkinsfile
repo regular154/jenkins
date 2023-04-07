@@ -4,11 +4,7 @@ pipeline {
         stage('trigger job') {
             steps {
                 build job: 'test/main', parameters: [
-                    RESTList: [
-                        {
-                            "name": "asdfdsf",
-                            "value": "sdfdsf"
-                        }
+                    file(name: 'HTML', value: '@test.html')
                 ]
             }
         }
