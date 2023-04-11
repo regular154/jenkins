@@ -4,7 +4,7 @@ pipeline {
         stage('trigger job') {
             steps {
                 stash includes: 'test.html', name: 'HTML'
-                build(job: 'test/main', parameters: [stashedFile(name: 'HTML')])
+                build(job: 'test/main', parameters: [stashedFile(name: 'HTML', file: 'HTML')])
 
 //                 script {
 //                     encodedTestFile = sh(script: 'base64 -w0 test.html', returnStdout: true)
