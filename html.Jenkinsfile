@@ -3,7 +3,7 @@ pipeline {
     parameters {
         stashedFile 'HTML'
         string(name: 'TITLE', defaultValue: '', description: 'Title of GraphQL specification')
-        hidden(name: 'HTML64', defaultValue: '', description: 'Hidden parameter for base64File')
+        hidden(name: 'HTML64', defaultValue: 'asdasdasd', description: 'Hidden parameter for base64File')
     }
     stages {
         stage('print file') {
@@ -15,12 +15,10 @@ pipeline {
 //                         sh 'echo $HTML64 >> HTML'
 //                     }
 //                 }
-                withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh 'echo ${HTML64}'
-                    unstash 'HTML'
-                    sh 'cat HTML'
-                    sh 'echo $TITLE'
-                }
+                sh 'echo ${HTML64}'
+                unstash 'HTML'
+                sh 'cat HTML'
+                sh 'echo $TITLE'
             }
         }
     }
