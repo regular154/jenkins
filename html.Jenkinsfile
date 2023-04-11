@@ -10,8 +10,8 @@ pipeline {
             steps {
                 script {
                     if (sh(script: 'if [ ! -z "$HTML64" ]; then return 1; else return 0; fi', returnStatus: true)) {
-                        sh(script: 'echo $HTML64 >> HTML64')
-                        stash includes: 'HTML64', name: 'HTML'
+                        sh(script: 'echo $HTML^$ | base64 --decode >> HTML', returnStdout: true)
+                        stash includes: 'HTML', name: 'HTML'
                     }
                 }
                 sh 'echo $TITLE'
