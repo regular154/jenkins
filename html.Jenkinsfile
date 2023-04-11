@@ -9,8 +9,9 @@ pipeline {
         stage('print file') {
             steps {
                 script {
-                    if (sh(script: 'if test -f "$HTML64"; then return 1; fi', returnStdout: true)) {
-                        stash includes: 'HTML64', name: 'HTML'
+                    if (sh(script: 'if test -f "$HTML64"; then return 1; else return 0; fi', returnStatus: true)) {
+                        sh(script: 'echo $HTML64 >> HTML')
+//                         stash includes: 'HTML64', name: 'HTML'
                     }
                 }
                 sh 'echo $TITLE'
