@@ -9,7 +9,11 @@ pipeline {
         stage('print file') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    unstash 'HTML'
+                    if ( sh 'if test -f "$HTML"; then return 1; fi') {
+                        unstash 'HTML'
+                    } else {
+                        sh 'echo $HTML64 >> HTML'
+                    }
                     sh 'cat HTML'
                     sh 'echo $TITLE'
                 }
