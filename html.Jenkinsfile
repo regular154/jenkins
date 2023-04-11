@@ -3,6 +3,8 @@ pipeline {
     parameters {
         stashedFile 'HTML'
         string(name: 'TITLE', defaultValue: '', description: 'Title of GraphQL specification')
+        base64File(name: 'HTML64', defaultValue: '', description: 'Title of GraphQL specification')
+        hidden(name: 'HTML64', description: 'Hidden parameter for base64File')
     }
     stages {
         stage('print file') {
