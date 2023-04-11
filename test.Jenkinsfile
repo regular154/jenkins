@@ -3,10 +3,13 @@ pipeline {
     stages {
         stage('trigger job') {
             steps {
+                stash includes: 'test.html', name: 'HTML'
+
                 script {
-                    encodedTestFile = sh(script: 'base64 -w0 test.html', returnStdout: true)
+//                     encodedTestFile = sh(script: 'base64 -w0 test.html', returnStdout: true)
+//                     stash includes: 'dist/**/*', name: 'builtSources'
                     build job: 'test/main', parameters: [
-                        string(name: 'HTML64', value: encodedTestFile),
+                        stashedFile(name: 'HTML'),
                         string(name: 'TITLE', value: 'from trigger')
                     ]
                 }
