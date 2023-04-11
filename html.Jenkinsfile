@@ -16,9 +16,10 @@ pipeline {
 //                     }
 //                 }
 //                 sh 'echo ${HTML64}'
+                sh 'echo $TITLE'
+                sh 'echo $HTML64'
                 unstash 'HTML'
                 sh 'cat HTML'
-                sh 'echo $TITLE'
             }
         }
     }
