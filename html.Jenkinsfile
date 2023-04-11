@@ -15,7 +15,7 @@ pipeline {
 //                         sh 'echo $HTML64 >> HTML'
 //                     }
 //                 }
-                sh 'echo ${HTML64}'
+//                 sh 'echo ${HTML64}'
                 unstash 'HTML'
                 sh 'cat HTML'
                 sh 'echo $TITLE'
