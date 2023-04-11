@@ -7,12 +7,14 @@ pipeline {
     }
     stages {
         stage('print file') {
-            if (sh(script: 'if test -f "$HTML"; then return 1; fi', returnStdout: true)) {
-                unstash 'HTML'
-            } else {
-                sh 'echo $HTML64 >> HTML'
-            }
             steps {
+                script {
+                    if (sh(script: 'if test -f "$HTML"; then return 1; fi', returnStdout: true)) {
+                        unstash 'HTML'
+                    } else {
+                        sh 'echo $HTML64 >> HTML'
+                    }
+                }
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh 'cat HTML'
                     sh 'echo $TITLE'
