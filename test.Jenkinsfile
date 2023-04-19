@@ -1,14 +1,15 @@
 pipeline {
     agent any
     stages {
-        stage('trigger job') {
+        stage('Publish GraphQL') {
             steps {
-                encodedTestFile = sh(script: 'base64 -w0 test.html', returnStdout: true)
-                build(job: 'test/main', parameters: [
-                        string(name: 'TITLE', value: 'title example'),
+                script {
+                    encodedTestFile = sh(script: 'base64 -w0 test.html', returnStdout: true)
+                    build job: 'test/main', parameters: [
+                        string(name: 'TITLE', value: 'PMDAPI'),
                         base64File(name: 'HTML64', base64: encodedTestFile)
                     ]
-                )
+                }
             }
         }
     }
