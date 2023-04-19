@@ -9,7 +9,7 @@ pipeline {
         stage('print file') {
             steps {
                 script {
-                    if (sh(script: 'if [ ! -z "$HTML64" ]; then return 1; else return 0; fi', returnStatus: true)) {
+                    if (params.HTML64.isNotEmpty()) {
                         sh(script: 'echo "$HTML64" | base64 -d > HTML', returnStdout: true)
                         stash includes: 'HTML', name: 'HTML'
                     }
