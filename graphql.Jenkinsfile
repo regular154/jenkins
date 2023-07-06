@@ -18,6 +18,12 @@ pipeline {
         stage('print') {
             steps {
                 script {
+                    script {
+                        if (!params.HTML64.isEmpty()) {
+                            sh(script: 'echo "$HTML64" | base64 -d > HTML', returnStdout: true)
+                            stash includes: 'HTML', name: 'HTML'
+                        }
+                    }
                     unstash 'HTML'
                     sh 'echo $HTML'
                 }
