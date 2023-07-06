@@ -25,7 +25,7 @@ pipeline {
                         }
                     }
                     unstash 'HTML'
-                    sh 'echo "$HTML"'
+                    sh 'cat HTML'
                 }
             }
         }
