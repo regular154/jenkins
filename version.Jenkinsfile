@@ -21,14 +21,14 @@ pipeline {
 }
 
 def update_version(def gitUsername = "jenkinspush") {
-    def isRelease = "${env.BRANCH_NAME}".contains("release/")
-    def newVersion = getIncrementedVersion("patch", !isRelease)
+    def isRelease = false
+    def newVersion = getIncrementedVersion("patch", true)
 
     writeVersionToFile(newVersion)
 
-    sh 'git config user.email $GIT_USERNAME'
+    sh 'git config user.email siroshtan.home@gmail.com'
     sh """
-        git config user.name ${gitUsername}
+        git config user.name regular154
         git add gradle.properties
         git commit -m \"[ci skip] New version: ${newVersion}\"
     """
@@ -88,4 +88,13 @@ def skipCi(def number = 1) {
         currentBuild.result = "ABORTED"
         error("Found CI skip condition, skipping build...")
     }
+}
+
+def getProjectVersion(def keepSnapshot = true) {
+    def version = sh (
+            script: "cat gradle.properties | grep \"version\" | cut -d'=' -f2",
+            returnStdout: true
+    ).trim()
+
+    return keepSnapshot ? version : "${version}".replace("-SNAPSHOT", "")
 }
