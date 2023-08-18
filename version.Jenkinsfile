@@ -9,7 +9,9 @@ pipeline {
         stage('test') {
             steps {
                 script {
-                    update_version()
+                    withCredentials([gitUsernamePassword(credentialsId: "jenkinspush-bitbucket-server-login-personal-access-token")]) {
+                        update_version()
+                    }
                 }
             }
         }
